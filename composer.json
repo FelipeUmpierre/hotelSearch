@@ -1,0 +1,22 @@
+{
+  "name": "hotel searching",
+  "description": "This is a sample code to create a search engine to hotels.",
+  "authors": [
+    {
+      "name": "Felipe Pieretti Umpierre",
+      "email": "umpierre.felipe@gmail.com"
+    }
+  ],
+
+  "require-dev": {
+    "phpunit/phpunit": "4.8.*"
+  },
+
+  "autoload": {
+    "psr-4": {
+      "src\\": "src/"
+    }
+  },
+
+  "minimum-stability": "dev"
+}
