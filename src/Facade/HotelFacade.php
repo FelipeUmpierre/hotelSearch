@@ -2,16 +2,23 @@
 
 namespace Facade;
 
+use Dao\HotelDao;
 use Entity\Hotel;
 use Entity\Partner;
-use Service\HotelServiceInterface;
 
-class HotelFacade implements HotelServiceInterface
+class HotelFacade
 {
     /**
-     * @var \Entity\Hotel[]
+     * @var \Dao\HotelDao
      */
-    private $hotel;
+    private $hotelDao;
+
+    public function __construct()
+    {
+        if (null == $this->hotelDao) {
+            $this->hotelDao = new HotelDao();
+        }
+    }
 
     /**
      * Insert a new item in the array
@@ -20,7 +27,7 @@ class HotelFacade implements HotelServiceInterface
      */
     public function add(Hotel $hotel)
     {
-        $this->hotel[$hotel->getId()] = $hotel;
+        $this->hotelDao->add($hotel);
     }
 
     /**
@@ -30,7 +37,7 @@ class HotelFacade implements HotelServiceInterface
      */
     public function update(Hotel $hotel)
     {
-        $this->add($hotel);
+        $this->hotelDao->update($hotel);
     }
 
     /**
@@ -41,13 +48,7 @@ class HotelFacade implements HotelServiceInterface
      */
     public function delete($id)
     {
-        if ($this->get($id)) {
-            unset($this->hotel[$id]);
-
-            return true;
-        }
-
-        return false;
+        return $this->hotelDao->delete($id);
     }
 
     /**
@@ -58,10 +59,7 @@ class HotelFacade implements HotelServiceInterface
      */
     public function addPartnerToHotel(Partner $partner, $hotelId)
     {
-        $hotel = $this->get($hotelId);
-        $hotel->setPartner($partner);
-
-        $this->update($hotel);
+        // tests
     }
 
     /**
@@ -72,10 +70,7 @@ class HotelFacade implements HotelServiceInterface
      */
     public function get($id)
     {
-        if (isset($this->hotel[$id]))
-            return $this->hotel[$id];
-
-        return null;
+        return $this->hotelDao->get($id);
     }
 
     /**
@@ -85,28 +80,6 @@ class HotelFacade implements HotelServiceInterface
      */
     public function getAll()
     {
-        return $this->hotel;
-    }
-
-    /**
-     * Will return a list of hotels by partner name
-     *
-     * @param $partnerName
-     * @return \Entity\Hotel[]
-     */
-    public function getHotelFromPartnerName($partnerName)
-    {
-        // TODO: Implement getHotelFromPartnerName() method.
-    }
-
-    /**
-     * Will return a list of hotels by price
-     *
-     * @param $price
-     * @return \Entity\Hotel[]
-     */
-    public function getHotelByPrice($price)
-    {
-        // TODO: Implement getHotelByPrice() method.
+        return $this->hotelDao->getAll();
     }
 }

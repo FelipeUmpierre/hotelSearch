@@ -2,14 +2,22 @@
 
 namespace Facade;
 
+use Dao\PriceDao;
 use Entity\Price;
 
 class PriceFacade
 {
     /**
-     * @var \Entity\Price[]
+     * @var \Dao\PriceDao
      */
-    private $price;
+    private $priceDao;
+
+    public function __construct()
+    {
+        if (null == $this->priceDao) {
+            $this->priceDao = new PriceDao();
+        }
+    }
 
     /**
      * Insert a new item in the array
@@ -18,7 +26,7 @@ class PriceFacade
      */
     public function add(Price $price)
     {
-        $this->price[$price->getId()] = $price;
+        $this->priceDao->add($price);
     }
 
     /**
@@ -28,7 +36,7 @@ class PriceFacade
      */
     public function update(Price $price)
     {
-        $this->add($price);
+        $this->priceDao->update($price);
     }
 
     /**
@@ -39,13 +47,7 @@ class PriceFacade
      */
     public function delete($id)
     {
-        if ($this->get($id)) {
-            unset($this->price[$id]);
-
-            return true;
-        }
-
-        return false;
+        return $this->priceDao->delete($id);
     }
 
     /**
@@ -56,10 +58,7 @@ class PriceFacade
      */
     public function get($id)
     {
-        if (isset($this->price[$id]))
-            return $this->price[$id];
-
-        return null;
+        return $this->priceDao->get($id);
     }
 
     /**
@@ -69,6 +68,6 @@ class PriceFacade
      */
     public function getAll()
     {
-        return $this->price;
+        return $this->priceDao->getAll();
     }
 }

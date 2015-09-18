@@ -2,14 +2,22 @@
 
 namespace Facade;
 
+use Dao\CityDao;
 use Entity\City;
 
 class CityFacade
 {
     /**
-     * @var \Entity\City[]
+     * @var \Dao\CityDao
      */
-    private $city = array();
+    private $cityDao;
+
+    public function __construct()
+    {
+        if (null == $this->cityDao) {
+            $this->cityDao = new CityDao();
+        }
+    }
 
     /**
      * Insert a new item in the array
@@ -18,7 +26,7 @@ class CityFacade
      */
     public function add(City $city)
     {
-        $this->city[$city->getId()] = $city;
+        $this->cityDao->add($city);
     }
 
     /**
@@ -28,7 +36,7 @@ class CityFacade
      */
     public function update(City $city)
     {
-        $this->add($city);
+        $this->cityDao->update($city);
     }
 
     /**
@@ -39,13 +47,7 @@ class CityFacade
      */
     public function delete($id)
     {
-        if ($this->get($id)) {
-            unset($this->city[$id]);
-
-            return true;
-        }
-
-        return false;
+        return $this->cityDao->delete($id);
     }
 
     /**
@@ -56,10 +58,7 @@ class CityFacade
      */
     public function get($id)
     {
-        if (isset($this->city[$id]))
-            return $this->city[$id];
-
-        return null;
+        return $this->cityDao->get($id);
     }
 
     /**
@@ -69,6 +68,6 @@ class CityFacade
      */
     public function getAll()
     {
-        return $this->city;
+        return $this->cityDao->getAll();
     }
 }

@@ -2,14 +2,22 @@
 
 namespace Facade;
 
+use Dao\PartnerDao;
 use Entity\Partner;
 
 class PartnerFacade
 {
     /**
-     * @var \Entity\Partner[]
+     * @var \Dao\PartnerDao
      */
-    private $partner;
+    private $partnerDao;
+
+    public function __construct()
+    {
+        if (null == $this->partnerDao) {
+            $this->partnerDao = new PartnerDao();
+        }
+    }
 
     /**
      * Insert a new item in the array
@@ -18,7 +26,7 @@ class PartnerFacade
      */
     public function add(Partner $partner)
     {
-        $this->partner[$partner->getId()] = $partner;
+        $this->partnerDao->add($partner);
     }
 
     /**
@@ -28,7 +36,7 @@ class PartnerFacade
      */
     public function update(Partner $partner)
     {
-        $this->add($partner);
+        $this->partnerDao->update($partner);
     }
 
     /**
@@ -39,13 +47,7 @@ class PartnerFacade
      */
     public function delete($id)
     {
-        if ($this->get($id)) {
-            unset($this->partner[$id]);
-
-            return true;
-        }
-
-        return false;
+        return $this->partnerDao->delete($id);
     }
 
     /**
@@ -56,10 +58,7 @@ class PartnerFacade
      */
     public function get($id)
     {
-        if (isset($this->partner[$id]))
-            return $this->partner[$id];
-
-        return null;
+        return $this->partnerDao->get($id);
     }
 
     /**
@@ -69,6 +68,6 @@ class PartnerFacade
      */
     public function getAll()
     {
-        return $this->partner;
+        return $this->partnerDao->getAll();
     }
 }
