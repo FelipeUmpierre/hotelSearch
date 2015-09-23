@@ -38,7 +38,11 @@ class Price
      */
     public function __construct($id, $description, $amount, $from, $to)
     {
-        $this->setId($id)->setDescription($description)->setAmount($amount)->setFrom($from)->setTo($to);
+        $this->setId($id)
+             ->setDescription($description)
+             ->setAmount($amount)
+             ->setFrom($from)
+             ->setTo($to);
     }
 
     /**

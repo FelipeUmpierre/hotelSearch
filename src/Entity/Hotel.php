@@ -31,7 +31,9 @@ class Hotel
      */
     public function __construct($id, $name, $address)
     {
-        $this->setId($id)->setName($name)->setAddress($address);
+        $this->setId($id)
+             ->setName($name)
+             ->setAddress($address);
     }
 
     /**

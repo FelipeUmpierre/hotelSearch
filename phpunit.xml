@@ -27,7 +27,7 @@
              lowUpperBound="50"
              highLowerBound="80"/>
     </logging>
-    
+
     <php>
         <ini name="error_reporting" value="-1" />
         <ini name="display_errors" value="On" />

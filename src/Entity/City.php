@@ -25,7 +25,8 @@ class City
      */
     public function __construct($id, $name)
     {
-        $this->setId($id)->setName($name);
+        $this->setId($id)
+             ->setName($name);
     }
 
     /**

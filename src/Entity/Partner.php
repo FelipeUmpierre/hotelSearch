@@ -31,7 +31,9 @@ class Partner
      */
     public function __construct($id, $name, $homepage)
     {
-        $this->setId($id)->setName($name)->setHomepage($homepage);
+        $this->setId($id)
+             ->setName($name)
+             ->setHomepage($homepage);
     }
 
     /**
