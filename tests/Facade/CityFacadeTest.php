@@ -1,12 +1,15 @@
 <?php
 
+use Entity\City;
+use Facade\CityFacade;
+
 class CityFacadeTest extends PHPUnit_Framework_TestCase
 {
     public function testAdd()
     {
-        $city = new Entity\City(1, "Brasil");
+        $city = new City(1, "Brasil");
 
-        $cityFacade = new Facade\CityFacade();
+        $cityFacade = new CityFacade();
         $cityFacade->add($city);
 
         $testCity = $cityFacade->get(1);
