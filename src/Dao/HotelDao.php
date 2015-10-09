@@ -3,6 +3,7 @@
 namespace Dao;
 
 use Entity\Hotel;
+use Facade\PartnerFacade;
 
 class HotelDao
 {
@@ -19,6 +20,20 @@ class HotelDao
     public function add(Hotel $hotel)
     {
         $this->hotel[$hotel->getId()] = $hotel;
+    }
+
+    /**
+     * Add a PartnerFacade to a Hotel
+     *
+     * @param Hotel $hotel
+     * @param PartnerFacade $partnerFacade
+     */
+    public function addPartner(Hotel $hotel, PartnerFacade $partnerFacade)
+    {
+        $hotel = $this->get($hotel->getId());
+        $hotel->setPartner($partnerFacade);
+
+        $this->update($hotel);
     }
 
     /**
@@ -46,20 +61,6 @@ class HotelDao
         }
 
         return false;
-    }
-
-    /**
-     * Add a Partner to a Hotel
-     *
-     * @param Partner $partner
-     * @param $hotelId
-     */
-    public function addPartnerToHotel(Partner $partner, $hotelId)
-    {
-        $hotel = $this->get($hotelId);
-        $hotel->setPartner($partner);
-
-        $this->update($hotel);
     }
 
     /**
