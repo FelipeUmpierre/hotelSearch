@@ -31,6 +31,17 @@ class HotelFacade
     }
 
     /**
+     * Add a PartnerFacade to a Hotel
+     *
+     * @param Hotel $hotel
+     * @param PartnerFacade $partnerFacade
+     */
+    public function addPartner(Hotel $hotel, PartnerFacade $partnerFacade)
+    {
+        $this->hotelDao->addPartner($hotel, $partnerFacade);
+    }
+
+    /**
      * Update an item from the array
      *
      * @param Hotel $hotel
@@ -49,17 +60,6 @@ class HotelFacade
     public function delete($id)
     {
         return $this->hotelDao->delete($id);
-    }
-
-    /**
-     * Add a Partner to a Hotel
-     *
-     * @param Partner $partner
-     * @param $hotelId
-     */
-    public function addPartnerToHotel(Partner $partner, $hotelId)
-    {
-        // tests
     }
 
     /**

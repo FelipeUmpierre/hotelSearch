@@ -30,6 +30,17 @@ class CityFacade
     }
 
     /**
+     * Add a HotelFacade to a City
+     *
+     * @param City $city
+     * @param HotelFacade $hotel
+     */
+    public function addHotel(City $city, HotelFacade $hotel)
+    {
+        $this->cityDao->addHotel($city, $hotel);
+    }
+
+    /**
      * Update an item from the array
      *
      * @param City $city

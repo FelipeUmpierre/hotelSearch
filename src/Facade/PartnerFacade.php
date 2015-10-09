@@ -30,6 +30,17 @@ class PartnerFacade
     }
 
     /**
+     * Add a PriceFacade to a Partner
+     *
+     * @param Partner $partner
+     * @param PriceFacade $priceFacade
+     */
+    public function addPrice(Partner $partner, PriceFacade $priceFacade)
+    {
+        $this->partnerDao->addPrice($partner, $priceFacade);
+    }
+
+    /**
      * Update an item from the array
      *
      * @param Partner $partner
