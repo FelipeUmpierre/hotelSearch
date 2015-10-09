@@ -2,6 +2,8 @@
 
 namespace Entity;
 
+use Facade\PriceFacade;
+
 class Partner
 {
     /**
@@ -37,6 +39,8 @@ class Partner
     }
 
     /**
+     * Get the id
+     *
      * @return int
      */
     public function getId()
@@ -45,6 +49,8 @@ class Partner
     }
 
     /**
+     * Set the id
+     *
      * @param int $id
      * @return $this
      */
@@ -56,6 +62,8 @@ class Partner
     }
 
     /**
+     * Get the name
+     *
      * @return string
      */
     public function getName()
@@ -64,6 +72,8 @@ class Partner
     }
 
     /**
+     * Set the name
+     *
      * @param string $name
      * @return $this
      */
@@ -75,6 +85,8 @@ class Partner
     }
 
     /**
+     * Get the homepage
+     *
      * @return string
      */
     public function getHomepage()
@@ -83,6 +95,8 @@ class Partner
     }
 
     /**
+     * Set the homepage
+     *
      * @param string $homepage
      * @return $this
      */
@@ -94,7 +108,9 @@ class Partner
     }
 
     /**
-     * @return Price[]
+     * Get the prices
+     *
+     * @return PriceFacade[]
      */
     public function getPrice()
     {
@@ -102,10 +118,12 @@ class Partner
     }
 
     /**
-     * @param Price $price
+     * Set the price
+     *
+     * @param PriceFacade $price
      * @return $this
      */
-    public function setPrice(Price $price)
+    public function setPrice(PriceFacade $price)
     {
         $this->price[] = $price;
 

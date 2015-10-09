@@ -2,6 +2,8 @@
 
 namespace Entity;
 
+use Facade\HotelFacade;
+
 class City
 {
     /**
@@ -15,7 +17,7 @@ class City
     private $name;
 
     /**
-     * @var Hotel[]
+     * @var \Facade\HotelFacade[]
      */
     private $hotel;
 
@@ -30,6 +32,8 @@ class City
     }
 
     /**
+     * Get the id
+     *
      * @return int
      */
     public function getId()
@@ -38,6 +42,8 @@ class City
     }
 
     /**
+     * Set the id
+     *
      * @param int $id
      * @return $this
      */
@@ -49,6 +55,8 @@ class City
     }
 
     /**
+     * Get the name
+     *
      * @return string
      */
     public function getName()
@@ -57,6 +65,8 @@ class City
     }
 
     /**
+     * Set the name
+     *
      * @param string $name
      * @return $this
      */
@@ -68,18 +78,22 @@ class City
     }
 
     /**
-     * @return Hotel[]
+     * Get the hotels
+     *
+     * @return \Facade\HotelFacade[]
      */
-    public function getHotels()
+    public function getHotel()
     {
-        return $this->hotels;
+        return $this->hotel;
     }
 
     /**
-     * @param mixed $hotel
+     * Set the hotel
+     *
+     * @param HotelFacade $hotel
      * @return $this
      */
-    public function setHotel(Hotel$hotel)
+    public function setHotel(HotelFacade $hotel)
     {
         $this->hotel[] = $hotel;
 

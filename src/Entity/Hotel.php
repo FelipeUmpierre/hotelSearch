@@ -2,6 +2,8 @@
 
 namespace Entity;
 
+use Facade\PartnerFacade;
+
 class Hotel
 {
     /**
@@ -20,7 +22,7 @@ class Hotel
     private $address;
 
     /**
-     * @var \Entity\Partner[]
+     * @var \Facade\PartnerFacade[]
      */
     private $partner;
 
@@ -37,6 +39,8 @@ class Hotel
     }
 
     /**
+     * Get the id
+     *
      * @return int
      */
     public function getId()
@@ -45,6 +49,8 @@ class Hotel
     }
 
     /**
+     * Set the id
+     *
      * @param int $id
      * @return $this
      */
@@ -56,6 +62,8 @@ class Hotel
     }
 
     /**
+     * Get the name
+     *
      * @return string
      */
     public function getName()
@@ -64,6 +72,8 @@ class Hotel
     }
 
     /**
+     * Set the name
+     *
      * @param string $name
      * @return $this
      */
@@ -75,6 +85,8 @@ class Hotel
     }
 
     /**
+     * Get the address
+     *
      * @return string
      */
     public function getAddress()
@@ -83,6 +95,8 @@ class Hotel
     }
 
     /**
+     * Set the address
+     *
      * @param string $address
      * @return $this
      */
@@ -94,7 +108,9 @@ class Hotel
     }
 
     /**
-     * @return Partner[]
+     * Get the array of partners
+     *
+     * @return PartnerFacade[]
      */
     public function getPartner()
     {
@@ -102,10 +118,12 @@ class Hotel
     }
 
     /**
-     * @param Partner $partner
+     * Set a partner
+     *
+     * @param PartnerFacade $partner
      * @return $this
      */
-    public function setPartner(Partner $partner)
+    public function setPartner(PartnerFacade $partner)
     {
         $this->partner[] = $partner;
 
