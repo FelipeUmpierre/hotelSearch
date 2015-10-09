@@ -3,6 +3,8 @@
 namespace Dao;
 
 use Entity\City;
+use Entity\Hotel;
+use Facade\HotelFacade;
 
 class CityDao
 {
@@ -19,6 +21,20 @@ class CityDao
     public function add(City $city)
     {
         $this->city[$city->getId()] = $city;
+    }
+
+    /**
+     * Add a HotelFacade to a City
+     *
+     * @param City $city
+     * @param HotelFacade $hotel
+     */
+    public function addHotel(City $city, HotelFacade $hotel)
+    {
+        $city = $this->get($city->getId());
+        $city->setHotel($hotel);
+
+        $this->update($city);
     }
 
     /**
