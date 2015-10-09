@@ -3,6 +3,7 @@
 namespace Dao;
 
 use Entity\Partner;
+use Facade\PriceFacade;
 
 class PartnerDao
 {
@@ -19,6 +20,20 @@ class PartnerDao
     public function add(Partner $partner)
     {
         $this->partner[$partner->getId()] = $partner;
+    }
+
+    /**
+     * Add a PriceFacade to a Partner
+     *
+     * @param Partner $partner
+     * @param PriceFacade $priceFacade
+     */
+    public function addPrice(Partner $partner, PriceFacade $priceFacade)
+    {
+        $partner = $this->get($partner->getId());
+        $partner->setPrice($priceFacade);
+
+        $this->update($partner);
     }
 
     /**
