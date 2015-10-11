@@ -23,10 +23,13 @@ class PartnerFacade
      * Insert a new item in the array
      *
      * @param Partner $partner
+     * @return $this
      */
     public function add(Partner $partner)
     {
         $this->partnerDao->add($partner);
+
+        return $this;
     }
 
     /**
@@ -80,5 +83,16 @@ class PartnerFacade
     public function getAll()
     {
         return $this->partnerDao->getAll();
+    }
+
+    /**
+     * Will return the partner by name
+     *
+     * @param $partnerName
+     * @return Partner|null
+     */
+    public function getPartnerByName($partnerName)
+    {
+        return $this->partnerDao->getPartnerByName($partnerName);
     }
 }
