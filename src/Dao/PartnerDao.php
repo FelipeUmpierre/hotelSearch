@@ -4,8 +4,9 @@ namespace Dao;
 
 use Entity\Partner;
 use Facade\PriceFacade;
+use Service\PartnerServiceInterface;
 
-class PartnerDao
+class PartnerDao implements PartnerServiceInterface
 {
     /**
      * @var \Entity\Partner[]
@@ -85,5 +86,24 @@ class PartnerDao
     public function getAll()
     {
         return $this->partner;
+    }
+
+    /**
+     * Will return the partner by name
+     *
+     * @param $partnerName
+     * @return Partner|null
+     */
+    public function getPartnerByName($partnerName)
+    {
+        if (!empty($this->partner)) {
+            foreach ($this->partner as $key => $partner) {
+                if ($partner->getName() == $partnerName) {
+                    return $partner;
+                }
+            }
+        }
+
+        return null;
     }
 }
