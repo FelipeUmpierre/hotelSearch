@@ -4,8 +4,9 @@ namespace Dao;
 
 use Entity\Hotel;
 use Facade\PartnerFacade;
+use Service\HotelServiceInterface;
 
-class HotelDao
+class HotelDao implements HotelServiceInterface
 {
     /**
      * @var \Entity\Hotel[]
@@ -85,5 +86,40 @@ class HotelDao
     public function getAll()
     {
         return $this->hotel;
+    }
+
+    /**
+     * Will return a list of hotels by partner name
+     *
+     * @param string $partnerName
+     * @return array of Hotel
+     */
+    public function getHotelFromPartnerName($partnerName)
+    {
+        $hotels = [];
+
+        // check if the hotel main array isn't empty
+        if (!empty($this->hotel)) {
+            // loop through the array
+            foreach ($this->hotel as $hotelKey => $hotel) {
+                // check if the hotel has at least one
+                // partner added
+                if (!empty($hotel->getPartner())) {
+                    // loop through the partners
+                    foreach ($hotel->getPartner() as $partnerKey => $partner) {
+                        // check if has any partner with the name
+                        // that came as parameter
+                        if ($partner->getPartnerByName($partnerName)) {
+                            // if has one with the name, get the
+                            // object of the hotel and add to the
+                            // hotels array
+                            $hotels[] = $hotel;
+                        }
+                    }
+                }
+            }
+        }
+
+        return $hotels;
     }
 }
