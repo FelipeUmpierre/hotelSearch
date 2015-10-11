@@ -82,4 +82,13 @@ class HotelFacade
     {
         return $this->hotelDao->getAll();
     }
+
+    /**
+     * @param $partnerName
+     * @return \Entity\Hotel[]
+     */
+    public function getHotelFromPartnerName($partnerName)
+    {
+        return $this->hotelDao->getHotelFromPartnerName($partnerName);
+    }
 }
