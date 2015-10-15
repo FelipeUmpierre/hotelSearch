@@ -1,6 +1,7 @@
 {
   "name": "hotel searching",
   "description": "This is a sample code to create a search engine to hotels.",
+  "version": "0.1.0"
   "authors": [
     {
       "name": "Felipe Pieretti Umpierre",
