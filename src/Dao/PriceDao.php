@@ -4,7 +4,7 @@ namespace Dao;
 
 use Entity\Price;
 
-class PriceDao
+class PriceDao implements \Countable
 {
     /**
      * @var \Entity\Price[]
@@ -15,10 +15,13 @@ class PriceDao
      * Insert a new item in the array
      *
      * @param Price $price
+     * @return int
      */
     public function add(Price $price)
     {
         $this->price[$price->getId()] = $price;
+
+        return $this->count();
     }
 
     /**
@@ -34,13 +37,13 @@ class PriceDao
     /**
      * Delete a price passing the id from the price
      *
-     * @param int $id Price id
+     * @param Price $price
      * @return bool
      */
-    public function delete($id)
+    public function delete(Price $price)
     {
-        if ($this->get($id)) {
-            unset($this->price[$id]);
+        if ($this->get($price->getId())) {
+            unset($this->price[$price->getId()]);
 
             return true;
         }
@@ -70,5 +73,13 @@ class PriceDao
     public function getAll()
     {
         return $this->price;
+    }
+
+    /**
+     * @return int
+     */
+    public function count()
+    {
+        return count($this->price);
     }
 }

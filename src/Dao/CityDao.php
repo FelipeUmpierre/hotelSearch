@@ -6,7 +6,7 @@ use Entity\City;
 use Entity\Hotel;
 use Facade\HotelFacade;
 
-class CityDao
+class CityDao implements \Countable
 {
     /**
      * @var \Entity\City[]
@@ -17,10 +17,13 @@ class CityDao
      * Insert a new item in the array
      *
      * @param City $city
+     * @return int
      */
     public function add(City $city)
     {
         $this->city[$city->getId()] = $city;
+
+        return $this->count();
     }
 
     /**
@@ -48,15 +51,15 @@ class CityDao
     }
 
     /**
-     * Delete a city passing the id from the city
+     * Delete a city passing the City object
      *
-     * @param int $id City id
+     * @param City $city
      * @return bool
      */
-    public function delete($id)
+    public function delete(City $city)
     {
-        if ($this->get($id)) {
-            unset($this->city[$id]);
+        if ($this->get($city->getId())) {
+            unset($this->city[$city->getId()]);
 
             return true;
         }
@@ -86,5 +89,13 @@ class CityDao
     public function getAll()
     {
         return $this->city;
+    }
+
+    /**
+     * @return int
+     */
+    public function count()
+    {
+        return count($this->city);
     }
 }

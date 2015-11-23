@@ -6,7 +6,7 @@ use Entity\Partner;
 use Facade\PriceFacade;
 use Service\PartnerServiceInterface;
 
-class PartnerDao implements PartnerServiceInterface
+class PartnerDao implements PartnerServiceInterface, \Countable
 {
     /**
      * @var \Entity\Partner[]
@@ -17,10 +17,13 @@ class PartnerDao implements PartnerServiceInterface
      * Insert a new item in the array
      *
      * @param Partner $partner
+     * @return int
      */
     public function add(Partner $partner)
     {
         $this->partner[$partner->getId()] = $partner;
+
+        return $this->count();
     }
 
     /**
@@ -50,13 +53,13 @@ class PartnerDao implements PartnerServiceInterface
     /**
      * Delete a partner passing the id from the partner
      *
-     * @param int $id Partner id
+     * @param Partner $partner
      * @return bool
      */
-    public function delete($id)
+    public function delete(Partner $partner)
     {
-        if ($this->get($id)) {
-            unset($this->partner[$id]);
+        if ($this->get($partner->getId())) {
+            unset($this->partner[$partner->getId()]);
 
             return true;
         }
@@ -105,5 +108,13 @@ class PartnerDao implements PartnerServiceInterface
         }
 
         return null;
+    }
+
+    /**
+     * @return int
+     */
+    public function count()
+    {
+        return count($this->partner);
     }
 }

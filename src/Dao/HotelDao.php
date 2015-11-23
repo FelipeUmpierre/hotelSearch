@@ -6,7 +6,7 @@ use Entity\Hotel;
 use Facade\PartnerFacade;
 use Service\HotelServiceInterface;
 
-class HotelDao implements HotelServiceInterface
+class HotelDao implements HotelServiceInterface, \Countable
 {
     /**
      * @var \Entity\Hotel[]
@@ -17,10 +17,13 @@ class HotelDao implements HotelServiceInterface
      * Insert a new item in the array
      *
      * @param Hotel $hotel
+     * @return int
      */
     public function add(Hotel $hotel)
     {
         $this->hotel[$hotel->getId()] = $hotel;
+
+        return $this->count();
     }
 
     /**
@@ -50,13 +53,13 @@ class HotelDao implements HotelServiceInterface
     /**
      * Delete a hotel passing the id from the hotel
      *
-     * @param int $id Hotel id
+     * @param Hotel $hotel
      * @return bool
      */
-    public function delete($id)
+    public function delete(Hotel $hotel)
     {
-        if ($this->get($id)) {
-            unset($this->hotel[$id]);
+        if ($this->get($hotel->getId())) {
+            unset($this->hotel[$hotel->getId()]);
 
             return true;
         }
@@ -121,5 +124,13 @@ class HotelDao implements HotelServiceInterface
         }
 
         return $hotels;
+    }
+
+    /**
+     * @return int
+     */
+    public function count()
+    {
+        return count($this->hotel);
     }
 }
